@@ -6,7 +6,10 @@ import (
 )
 
 func main() {
- defer db.SqlDB.Close()
- router:=router.InitRouter()
- router.Run(":8000")
+   //数据库
+   defer db.SqlDB.Close()
+   //路由部分
+   router:=router.InitRouter()
+   //运行的端口
+   router.Run(":8000")
 }
