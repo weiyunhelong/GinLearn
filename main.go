@@ -1,16 +1,12 @@
 package main
 
 import (
- "github.com/gin-gonic/gin"
- "net/http"
+ db "GinLearn/GinLearn/database"
+ router "GinLearn/GinLearn/routers"
 )
 
 func main() {
- router := gin.Default()
-
- router.GET("/", func(c *gin.Context) {
-  c.String(http.StatusOK, "Hello World!")
- })
-
- router.Run(":8800")
+ defer db.SqlDB.Close()
+ router:=router.InitRouter()
+ router.Run(":8000")
 }
