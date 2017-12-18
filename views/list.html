@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+ 
+<html>
+      <head>
+        <title>首页 - 用户列表页面</title>
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+        <script type="text/javascript" src="/static/js/jquery.paginationNew.js"></script> 
+        <style>
+          .am-cf{
+            height: 50px;          
+            margin-top: 30px;
+            line-height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            margin-left: 40%;
+          }
+          .am-fr{
+              float: left;
+              line-height: 50px;
+              text-align: center;
+              vertical-align: middle;
+              height: 50px;
+              margin-top: -15px;
+          }
+          .am-pagination{
+            list-style:none;
+            height: 50px;    
+            line-height: 50px;
+            text-align: center;
+            vertical-align: middle;
+          }
+          .am-pagination li{
+            float:left;
+            margin-left: 10px;
+          }
+          .am-pagination li a{
+            text-decoration:none;
+          }
+          .am-jl{
+              float: left;
+              margin-left: 20px;
+          }
+          .am-active{
+              color: #f00;
+          }
+        </style>
+      </head>
+       
+    <body>
+     
+        <div class="row pull-right" style="margin-bottom: 20px;margin-right: 5px;text-align:right;margin-right: 40px;">
+      
+          <input type="text" placeholder="请输入名称" id="txt_search"/>
+          <button class="" onclick="search()">搜索</button>
+
+          <button class="" onclick="adddata()">新增</button>
+        </div>
+            
+        <table class="table table-striped table-hover table-bordered ">
+          <thead>
+           <th style="text-align: center">ID</th>
+           <th style="text-align: center">姓氏</th>
+           <th style="text-align: center">名称</th>
+           <th style="text-align: center">操作</th>
+         </thead>
+        
+         <tbody id="sortable">
+         </tbody>
+        </table> <!--分页部分-->
+        <div style="margin: 20px 0px 10px 0;">
+         <table style="margin: 0 auto;">
+             <tr>
+                 <td>
+                     <div id="pagination" class="pagination"></div>
+                 </td>
+             </tr>
+         </table>
+        </div>
+          
+        <script type="text/javascript">
+            //页面的初始化
+            $(function () {            
+              //分页数据
+              InitData();
+            })
+            //搜索页面
+            function search(){
+                var search = $("#txt_search").val();//名称
+                InitData();
+            }
+            //使用分页插件pagination分页显示1
+        function InitData() {
+            var search = $("#txt_search").val();//名称
+
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/home/PageData",
+                data: {
+                    search: search,
+                    pageno:0
+                },
+                success: function (data) {
+                    console.log('首页数据')
+                    console.log(data)      
+                    var Count = data.count
+                    var PageSize = data.pagesize;
+                    var Page =data.pageno;
+                    $("#pagination").pagination(Count, {
+                        callback: pageselectCallback,
+                        num_edge_entries: 1,
+                        prev_text: "上一页",
+                        prev_show_always: true,
+                        next_text: "下一页",
+                        next_show_always: true,
+                        items_per_page: PageSize,
+                        current_page: Page,
+                        link_to: '#__aurl=!/home/PageData',
+                        num_display_entries: 4
+                    });
+                }
+            });
+        }
+
+        //使用分页插件分页后的回调函数2
+        function pageselectCallback(page_id, jq) {
+            var search = $("#txt_search").val();//名称
+
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/home/PageNextData",
+                data: {
+                    search: search,
+                    pageno: (parseInt(page_id) + parseInt(1)),
+                },
+                success: function (data) {
+                    console.log('下一页的数据')
+                    console.log(data)
+                    console.log(data.datalist)
+                    htmlData(data.datalist)
+                }
+            });
+        }
+        function htmlData(data){
+             var html='';
+             for(var i=0;i<data.length;i++){
+                html+='<tr class="sort-item"  id="module_'+data[i].id+'" value="'+data[i].id+'">';  
+                html+='   <td style="text-align: center;width: 350px;"><span class="label label-default" >'+data[i].id+'</span></td>';  
+                html+='   <td style="text-align: center;width: 350px;" ><strong>'+data[i].first_name+'</strong></td>';  
+                html+='   <td style="text-align: center;width: 350px;" ><strong>'+data[i].last_name+'</strong></td>';  
+                html+='   <td style="text-align: center;width: 350px;"><button onclick="editdata('+data[i].id+')">编辑</button><button onclick="deletedata('+data[i].id+')">删除</button></td>';                   
+                html+='</tr>';  
+             }
+              
+             $("#sortable").html(html);
+        }
+
+        //新增数据
+        function adddata(){
+            window.location.href="/home/add";  
+        }  
+
+        //编辑数据
+        function editdata(id){
+            window.location.href="/home/edit?id="+id; 
+        }
+
+        //删除数据
+        function deletedata(id){
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/home/delete",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if(data){
+                        alert("删除成功")
+                        //初始化数据
+                        InitData();
+                    }else{
+                        alert("删除失败")
+                    }
+                }
+            });
+        }
+        </script>
+    </body>
+</html>

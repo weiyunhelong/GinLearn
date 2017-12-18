@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+      <title>首页 - 新增用户页面</title>
+      <link rel="shortcut icon" href="/static/img/favicon.png" />  
+      <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+      <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+      <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>    
+    </head>
+       
+    <body>
+      <div class="container">
+         <form>
+           <div class="form-group">
+               <label for="text">姓氏:</label>
+               <input type="text" class="form-control" id="firstname" placeholder="姓氏" />
+           </div>
+           <div class="form-group">
+               <label for="number">名称:</label>
+               <input type="text" class="form-control" id="lastname" placeholder="名称" />
+            </div>
+            <button class="btn btn-default" onclick="save()">提交</button>
+            <button type="reset" class="btn btn-primary">重置</button>
+         </form>
+       </div>
+    <!--Js部分-->   
+    <script type="text/javascript">
+       //保存
+       function save(){
+        $.ajax({
+            type: "post",
+            url: "/home/saveadd",
+            data: {
+                "first_name":$("#firstname").val(),
+                "last_name":$("#lastname").val(),
+            },
+            success: function (data) {
+                console.log(data)
+                if(data.success){
+                    alert("新增成功")
+                    window.location.href="/home/list";
+                }else{
+                    alert("新增失败")
+                    return false;
+                }
+            }
+        });
+       }
+    </script>
+    </body>
+</html>
