@@ -2,7 +2,8 @@ package routers
 
 import (
   "github.com/gin-gonic/gin"
-  . "GinLearn/GinLearn/apis"
+  . "GinLearn/GinLearn/apis" //api部分
+  . "GinLearn/GinLearn/controllers" //constroller部分
  )
  
 func InitRouter() *gin.Engine{
@@ -27,6 +28,22 @@ func InitRouter() *gin.Engine{
 
     //删除
     router.POST("/home/delete", DeletePersonApi)
-  return router
+
+    //Bootstrap布局页面
+    router.GET("/home/bootstrap", Bootstraphtml)
+
+    //文件的上传和下载 
+    router.GET("/home/fileopt", Fileopthtml)
+    router.POST("/home/fileuplaod", Fileupload)
+    router.GET("/home/filedown", Filedown)
+
+    //文件的创建删除和读写
+    router.GET("/home/filerw", Filerwhtml)
+    router.POST("/home/addfile", FilerCreate)//创建文件
+    router.POST("/home/writefile", FilerWrite)//写入文件
+    router.POST("/home/readfile", FilerWrite)//读取文件
+    router.POST("/home/deletefile", FilerWrite)//删除文件
+    
+    return router
  }
  

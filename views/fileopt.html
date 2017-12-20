@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+ 
+<html>
+      <head>
+        <title>首页 - 用户列表页面</title>
+        <link rel="shortcut icon" href="/static/img/favicon.png" /> 
+        <link rel="stylesheet" href="/static/uploadify/uploadify.css" rel="stylesheet"/>
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+        <script src="/static/uploadify/jquery.uploadify.min.js"></script>
+      </head>       
+    <body>
+        <!--上传部分-->
+        <form method="POST" action="/Home/UploadFile" enctype="multipart/form-data">   
+            <input type="file" name="image" id="file_upload">
+            <div id="imgdiv" style="display:none;">
+
+            </div>
+            
+        </form>
+        <!--下载图片-->
+        <button value="下载图片" onclick="download()">下载图片</button>
+        <!--JS部分-->
+       <script type="text/javascript">
+         
+        //页面的初始化
+        $(function () {
+            $("#file_upload").uploadify({       //绑定元素      
+            'fileObjName':'image',//html input标签的name属性的值吧。                 
+            'debug':false,                  
+            'auto':true,    //自动上传 
+            'multi':true,
+            'removeCompleted':false, //上传完成以后是否保存进度条            
+            'buttonText':'选择文件',                                     
+            'cancelImg':'/static/uploadify/uploadify-cancel.png',                   
+            'swf':'/static/uploadify/uploadify.swf', //必须设置  swf文件路径             
+            'uploader':'/home/fileuplaod',         //必须设置，上传文件触发的url       
+            'fileTypeDesc':'FileType',                  
+            'fileTypeExts':'*.jpg;*.jpge;*.gif;*.png;',          
+            'multi':true,  
+            'onUploadSuccess': function (file, data, response) {
+               $("#imgdiv").show();
+               var html='<image src="/static/uploadfile/'+file.name+'" style="height:150px;width:150px;margin:20px;"/>';
+               $("#imgdiv").append(html);
+            }             
+          });         
+           
+        });
+        //下载图片
+        function download(){
+          //暂时没有提供后台的方法
+          //gin暂时没有实现下载方法
+          //只有使用url
+          window.location.href="/static/img/1.jpg";
+        }
+  </script>
+ </body>
+</html>

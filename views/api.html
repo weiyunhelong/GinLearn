@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+ 
+<html>
+      <head>
+        <title>首页 - 用户列表页面</title>
+        <link rel="shortcut icon" href="/static/img/favicon.png" /> 
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script> 
+      </head>       
+    <body>
+       <div class="container">
+        <!--请求得到Json数据--> 
+        <div style="width:100%;height:50px;">
+          <button onclick="getjson()" class="btn btn-primary">得到Json</button>
+          <label id="txtjson"></label>
+        </div>
+        <!--请求得到Xml数据--> 
+        <div style="width:100%;height:50px;">
+            <button onclick="getxml()" class="btn btn-primary">得到Xml</button>
+            <label id="txtxml"></label>
+        </div>
+        <!--请求得到Jsonp数据--> 
+        <div style="width:100%;height:50px;">
+          <button onclick="getjsonp()" class="btn btn-primary">得到Jsonp</button>
+          <label id="txtjsonp"></label>
+        </div>
+        <!--请求得到字典数据--> 
+        <div style="width:100%;height:50px;">
+            <button onclick="getdictionary()" class="btn btn-primary">得到字典</button>
+            <label id="txtdictionary"></label>
+        </div>
+
+        <!--请求得到字典数据--> 
+        <div style="width:100%;height:50px;">
+            <input type="text" id="search" placeholder="请输入参数"/>
+            <button onclick="getparams()" class="btn btn-primary">得到参数</button>
+            <label id="txtparams"></label>
+        </div>
+       </div>
+       
+        <!--JS部分-->
+        <script type="text/javascript">
+        
+          //得到Json
+          function getjson(){
+            $.ajax({
+               type:'get',
+               url:'/api/GetJson',
+               dataType:'json',//此处的是json数据的格式
+               data:{},
+               success:function(result){
+                   console.log('获取json的数据')
+                   console.log(result)
+                 $("#txtjson").html("json的结果："+result);
+               } 
+            })
+          }
+          //得到Xml
+          function getxml(){
+            $.ajax({
+               type:'get',
+               url:'/api/GetXml',
+               dataType:'xml',//此处的是xml数据的格式
+               data:{},
+               success:function(result){
+                   console.log('获取xml的数据')
+                   console.log(result)
+                   
+                 $("#txtxml").html("xml的结果："+$(result).text());
+               } 
+            })
+          }
+           //得到jsonp
+           function getjsonp(){
+            $.ajax({
+               type:'get',
+               url:'/api/GetJsonp',               
+               dataType:'jsonp',//此处的是jsonp数据的格式
+               data:{},
+               success:function(result){
+                   console.log('获取jsonp的数据')
+                   console.log(result)
+                 $("#txtjsonp").html("jsonp的结果:"+result);
+               } 
+            })
+          }
+          //得到字典
+          function getdictionary(){
+            $.ajax({
+               type:'get',
+               url:'/api/GetDictionary',//此处的是json数据的格式
+               data:{},
+               success:function(result){
+                   console.log('获取字典的数据')
+                   console.log(result)
+                 $("#txtdictionary").html("字典的结果:"+result.name+","+result.rows+","+result.flag);
+               } 
+            })
+          }
+          //得到参数
+          function getparams(){
+            $.ajax({
+               type:'get',
+               url:'/api/GetParams',//此处的是json数据的格式
+               data:{
+                 "name":$("#search").val()
+               },
+               success:function(result){
+                   console.log('获取参数的数据')
+                   console.log(result.json)
+                 $("#txtparams").html("获取参数结果:"+result.name+","+result.rows+","+result.flag);
+               } 
+            })
+          }
+        </script>
+    </body>
+</html>

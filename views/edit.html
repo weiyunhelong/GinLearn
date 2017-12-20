@@ -11,7 +11,7 @@
        
     <body>
       <div class="container">
-         <form>
+        
            <div class="form-group">
                <label for="text">姓氏:</label>
                <input type="text" class="form-control" id="firstname" placeholder="姓氏" value="{{.firstname}}"/>
@@ -22,8 +22,8 @@
             </div>
             <input type="hidden" id="idval" value="{{.id}}"/>
             <button class="btn btn-default" onclick="save()">提交</button>
-            <button type="reset" class="btn btn-primary">重置</button>
-         </form>
+            <button class="btn btn-primary" onclick="reset()">重置</button>
+         
        </div>
     <!--Js部分-->   
     <script type="text/javascript">
@@ -47,6 +47,11 @@
                 }
             }
         });
+       }
+        //重置
+       function reset(){
+        $("#firstname").val('');
+        $("#lastname").val('');
        }
     </script>
     </body>

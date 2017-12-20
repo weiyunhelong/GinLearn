@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+ 
+<html>
+      <head>
+        <title>首页 - 用户列表页面</title>
+        <link rel="shortcut icon" href="/static/img/favicon.png" /> 
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"/>
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script> 
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script> 
+        <style>
+          .bodercss{
+              border: 1px solid #00f;
+          }
+        </style>
+      </head>       
+    <body>
+        
+        <!--布局容器-->
+        <div class="container" style="border:1px solid red">
+            <p>这是container布局</p>
+            <p>.container 类用于固定宽度并支持响应式布局的容器。</p>
+        </div>  
+        <div class="container-fluid" style="border:1px solid #0f0">
+            <p>container-fluid</p>
+            <p>.container-fluid 类用于 100% 宽度，占据全部视口（viewport）的容器。</p>
+        </div>  
+        <!--栅格布局部分-->
+        <div class="container">
+            <div class="row">
+               <div class="col-md-1 bodercss">1</div>
+               <div class="col-md-1 bodercss">2</div>
+               <div class="col-md-1 bodercss">3</div>
+               <div class="col-md-1 bodercss">4</div>
+               <div class="col-md-1 bodercss">5</div>
+               <div class="col-md-1 bodercss">6</div>
+               <div class="col-md-1 bodercss">7</div>
+               <div class="col-md-1 bodercss">8</div>
+               <div class="col-md-1 bodercss">9</div>
+               <div class="col-md-1 bodercss">10</div>
+               <div class="col-md-1 bodercss">11</div>
+               <div class="col-md-1 bodercss">12</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 bodercss">2</div>
+                <div class="col-md-2 bodercss">4</div>
+                <div class="col-md-2 bodercss">6</div>                
+                <div class="col-md-2 bodercss">8</div>
+                <div class="col-md-2 bodercss">10</div>
+                <div class="col-md-2 bodercss">12</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 bodercss">3</div>
+                <div class="col-md-3 bodercss">6</div>
+                <div class="col-md-3 bodercss">9</div>
+                <div class="col-md-3 bodercss">12</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 bodercss">4</div>
+                <div class="col-md-4 bodercss">4</div>
+                <div class="col-md-4 bodercss">4</div>
+            </div>
+            <div class="row">                
+               <div class="col-md-4 bodercss">4</div>
+               <div class="col-md-8 bodercss">8</div>
+            </div>            
+            <div class="row">
+               <div class="col-md-6 bodercss">6</div>
+               <div class="col-md-6 bodercss">12</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 bodercss">12</div>
+            </div>
+        </div>
+        <!--表单控件-->
+        <div class="container">
+           <form>
+                <div class="form-group">
+                   <label for="text">文本:</label>
+                   <input type="text" class="form-control" id="text" placeholder="文本">
+                </div>
+                <div class="form-group">
+                   <label for="number">数字:</label>
+                   <input type="number" class="form-control" id="number" placeholder="数字">
+                </div>
+                <div class="form-group">
+                    <label for="datetime">时间:</label>
+                    <input type="datetime" class="form-control" id="datetime" placeholder="时间">
+                </div>
+                <div class="form-group">
+                   <label for="tel">电话:</label>
+                   <input type="tel" class="form-control" id="tel" placeholder="电话">
+                </div>
+                <div class="form-group">
+                  <label for="email">邮箱:</label>
+                  <input type="email" class="form-control" id="email" placeholder="邮箱">
+                </div>
+                <div class="form-group">
+                  <label for="password">密码</label>
+                  <input type="password" class="form-control" id="password" placeholder="密码">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">上传文件</label>
+                  <input type="file" id="exampleInputFile">
+                  <p class="help-block">上传文件</p>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="blankCheckbox" value="option1" />多选A
+                  </label>
+                  <label>                      
+                    <input type="checkbox" id="blankCheckbox" value="option1"/>多选B
+                  </label>
+                </div>
+                <div class="radio">
+                    <label>
+                      <input type="radio" name="blankRadio" id="blankRadio1" value="option1"/>单选A
+                    </label>
+                    <label>                        
+                      <input type="radio" name="blankRadio" id="blankRadio1" value="option1"/>单选B
+                    </label>
+                </div>
+                <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                <button type="submit" class="btn btn-default">提交</button>
+                <button type="reset" class="btn btn-primary">重置</button>
+              </form>
+            </div>
+              <!--按钮样式-->
+              <div class="container" style="margin-top:20px;">              
+                <button type="button" class="btn btn-default">（默认样式）Default</button>
+                <button type="button" class="btn btn-primary">（首选项）Primary</button>
+                <button type="button" class="btn btn-success">（成功）Success</button>
+                <button type="button" class="btn btn-info">（一般信息）Info</button>
+                <button type="button" class="btn btn-warning">（警告）Warning</button>
+                <button type="button" class="btn btn-danger">（危险）Danger</button>
+                <button type="button" class="btn btn-link">（链接）Link</button>
+              </div> 
+       
+        <!--图片形状-->
+        <div class="container" style="margin-top:20px;">
+            <img src="/static/img/1.jpg" style="width:200px;height:200px;" class="img-rounded">
+            <img src="/static/img/2.jpg" style="width:200px;height:200px;" class="img-circle">
+            <img src="/static/img/3.jpg" style="width:200px;height:200px;" class="img-thumbnail">
+        </div>
+    </body>
+</html>

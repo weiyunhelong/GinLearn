@@ -3,9 +3,9 @@ package apis
 import (
 	"fmt"
 	"strconv"
- "net/http"
- "log"
- "github.com/gin-gonic/gin"
+  "net/http"
+  "log"
+  "github.com/gin-gonic/gin"
  . "GinLearn/GinLearn/models"
 )
 //初始页面
@@ -82,7 +82,7 @@ func AddPersonApi(c *gin.Context) {
    //得到请求的参数
    firstName := c.PostForm("first_name")
    lastName := c.PostForm("last_name")
-   fmt.Println("执行到此处A")
+ 
    //赋值
    p := Person{FirstName: firstName, LastName: lastName}
    //调用模型中的新增的方法
@@ -91,7 +91,6 @@ func AddPersonApi(c *gin.Context) {
    c.JSON(http.StatusOK, gin.H{
     "success": ra,
   })
-  c.Redirect(http.StatusOK,"/home/list")
 }
 //编辑页面
 func EditHtml(c *gin.Context){
@@ -137,11 +136,11 @@ func EditPersonApi(c *gin.Context) {
   p.LastName=lastName
   //调用模型中的编辑的方法
   ra:= p.EditPerson()
+  
   //返回结果
   c.JSON(http.StatusOK, gin.H{
     "success": ra,
   })
-  c.Redirect(http.StatusOK,"/home/list")
 }
 
 //删除记录
