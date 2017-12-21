@@ -12,6 +12,7 @@ func InitRouter() *gin.Engine{
   router.GET("/", IndexApi)
   //渲染html页面
   router.LoadHTMLGlob("views/*")
+
   router.GET("/home/index", ShowHtmlPage)
   //列表页面
   router.GET("/home/list", ListHtml)
@@ -43,6 +44,16 @@ func InitRouter() *gin.Engine{
     router.POST("/home/writefile", FilerWrite)//写入文件
     router.POST("/home/readfile", FilerRead)//读取文件
     router.POST("/home/deletefile", FilerDelete)//删除文件
+    
+    //api调用的部分
+    router.GET("/home/api", GetApiHtml) 
+    router.GET("/api/jsondata", GetJsonData) 
+    router.GET("/api/xmldata", GetXmlData) 
+    router.GET("/api/yamldata", GetYamlData) 
+    router.GET("/api/paramsdata", GetParamsJsonData) 
+
+    //布局页面
+    router.GET("/home/content", Contenthtml)
     
     return router
  }
