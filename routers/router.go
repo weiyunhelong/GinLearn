@@ -41,8 +41,8 @@ func InitRouter() *gin.Engine{
     router.GET("/home/filerw", Filerwhtml)
     router.POST("/home/addfile", FilerCreate)//创建文件
     router.POST("/home/writefile", FilerWrite)//写入文件
-    router.POST("/home/readfile", FilerWrite)//读取文件
-    router.POST("/home/deletefile", FilerWrite)//删除文件
+    router.POST("/home/readfile", FilerRead)//读取文件
+    router.POST("/home/deletefile", FilerDelete)//删除文件
     
     return router
  }
